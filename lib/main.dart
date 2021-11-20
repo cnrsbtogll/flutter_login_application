@@ -121,5 +121,5 @@ class _ProfilEkraniState extends State<ProfilEkrani> {
 class VeriModeli {
   final String kullaniciAdi;
   final String sifre;
-  VeriModeli({this.kullaniciAdi, this.sifre});
+  VeriModeli({required this.kullaniciAdi, required this.sifre});
 }

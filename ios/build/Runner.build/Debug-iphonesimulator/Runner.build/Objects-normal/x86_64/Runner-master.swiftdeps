@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)"
 options: "2b5e44d00e5aaf869086c162b892b3a75ce712ed92a4b0cc36331011896ffae3"
-build_start_time: [1637229172, 427618980]
-build_end_time: [1637229173, 564683914]
+build_start_time: [1637405478, 601181983]
+build_end_time: [1637405479, 730784893]
 inputs:
   "/Users/canersabitogullari/Documents/Projects/flutter_login_application/ios/Runner/AppDelegate.swift": [1634330199, 0]

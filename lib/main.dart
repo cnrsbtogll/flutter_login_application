@@ -5,7 +5,13 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: GirisEkrani());
+    return MaterialApp(
+      initialRoute: "/",
+      routes: {
+        "/": (context) => GirisEkrani(),
+        "/ProfilSayfasiRotasi": (context) => ProfilEkrani(),
+      },
+    );
   }
 }
 
@@ -19,30 +25,31 @@ class _GirisEkraniState extends State<GirisEkrani> {
   TextEditingController t2 = TextEditingController();
 
   girisYap() {
-    // if (t1.text == "admin" && t2.text == "1234") {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ProfilEkrani()),
-    );
-    // } else {
-    //   showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: new Text("Yanlış kullanıcı adı veya şifre"),
-    //         content: new Text("Lütfen giriş bilgilerinizi gözden geçirin."),
-    //         actions: <Widget>[
-    //           new TextButton(
-    //             child: new Text("Kapat"),
-    //             onPressed: () {
-    //               Navigator.of(context).pop();
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    // }
+    if (t1.text == "admin" && t2.text == "1234") {
+      Navigator.pushNamed(
+        context,
+        "/ProfilSayfasiRotasi",
+        arguments: VeriModeli(kullaniciAdi: t1.text, sifre: t2.text),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text("Yanlış kullanıcı adı veya şifre"),
+            content: new Text("Lütfen giriş bilgilerinizi gözden geçirin."),
+            actions: <Widget>[
+              new TextButton(
+                child: new Text("Kapat"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -55,14 +62,14 @@ class _GirisEkraniState extends State<GirisEkrani> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // TextFormField(
-              //   decoration: InputDecoration(hintText: "Kullanıcı Adı"),
-              //   controller: t1,
-              // ),
-              // TextFormField(
-              //   decoration: InputDecoration(hintText: "Şifre"),
-              //   controller: t2,
-              // ),
+              TextFormField(
+                decoration: InputDecoration(hintText: "Kullanıcı Adı"),
+                controller: t1,
+              ),
+              TextFormField(
+                decoration: InputDecoration(hintText: "Şifre"),
+                controller: t2,
+              ),
               ElevatedButton(
                   onPressed: () {
                     girisYap();
@@ -88,8 +95,7 @@ class _ProfilEkraniState extends State<ProfilEkrani> {
 
   @override
   Widget build(BuildContext context) {
-    // final VeriModeli iletilenArgumanlar =
-    //     ModalRoute.of(context)!.settings.arguments;
+    final args = ModalRoute.of(context)!.settings.arguments as VeriModeli;
     return Scaffold(
       body: Container(
         child: Center(
@@ -102,8 +108,8 @@ class _ProfilEkraniState extends State<ProfilEkrani> {
                 },
                 child: Text("Çıkış Yap"),
               ),
-              // Text("Kullanıcı Adınız: ${iletilenArgumanlar.kullaniciAdi}"),
-              // Text("Şifreniz: ${iletilenArgumanlar.sifre}"),
+              Text("Kullanıcı Adınız: ${args.kullaniciAdi}"),
+              Text("Şifreniz: ${args.sifre}"),
             ],
           ),
         ),
@@ -113,6 +119,7 @@ class _ProfilEkraniState extends State<ProfilEkrani> {
 }
 
 class VeriModeli {
-  String kullaniciAdi, sifre;
-  VeriModeli({required this.kullaniciAdi, required this.sifre});
+  final String kullaniciAdi;
+  final String sifre;
+  VeriModeli({this.kullaniciAdi, this.sifre});
 }

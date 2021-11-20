@@ -36,11 +36,11 @@ class _GirisEkraniState extends State<GirisEkrani> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: new Text("Yanlış kullanıcı adı veya şifre"),
-            content: new Text("Lütfen giriş bilgilerinizi gözden geçirin."),
+            title: Text("Yanlış kullanıcı adı veya şifre"),
+            content: Text("Lütfen giriş bilgilerinizi gözden geçirin."),
             actions: <Widget>[
-              new TextButton(
-                child: new Text("Kapat"),
+              TextButton(
+                child: Text("Kapat"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
